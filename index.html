@@ -84,21 +84,27 @@
     </div>
 
     <script>
-        document.getElementById('khodamForm').addEventListener('submit', async function(event) {
+        document.getElementById('khodamForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const nama = document.getElementById('nama').value;
-            
-            const response = await fetch('http://localhost:3000/khodam', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nama: nama })
-            });
 
-            const data = await response.json();
-            document.getElementById('response').innerText = `${data.message.toUpperCase()} \n ${data.binatang.toUpperCase()}`;
+            const binatang = [
+                "Singa", "Gajah", "Kuda", "Elang", "Harimau", "Serigala", "Kucing", 
+                "Anjing", "Beruang", "Rusa", "Ikan Paus", "Lumba-lumba", "Buaya", 
+                "Kuda Nil", "Jerapah", "Naga", "Phoenix", "Unicorn", "Kraken", 
+                "Griffin", "Minotaur", "Sphinx", "Cerberus", "Chimera", 
+                "Basilisk", "Leviathan", "Pegasus", "Harpy", "Wyvern", "Manticore"
+            ];
+
+            const randomAnimal = getRandomAnimal(binatang);
+
+            function getRandomAnimal(animals) {
+                const randomIndex = Math.floor(Math.random() * animals.length);
+                return animals[randomIndex];
+            }
+
+            document.getElementById('response').innerText = `${nama.toUpperCase()} \n ${randomAnimal.toUpperCase()}`;
         });
     </script>
 </body>
